@@ -6,6 +6,7 @@ public enum Category {
     ELECTRONIC("Electronic"),
     SPORTS("Sports"),
     CLOTHING("Clothing"),
+    OTHER("Other"),
     PETS("Pets");
 
     private String description;

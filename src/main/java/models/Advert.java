@@ -104,4 +104,16 @@ public class Advert {
     public void setComments(ArrayList<String> comments) {
         this.comments = comments;
     }
+
+    public void addUserToFavouriters(User user){
+        this.favouriters.add(user);
+    }
+
+    public void removeUserFromFavouriters(User user){
+        this.favouriters.remove(user);
+    }
+
+    public void addCommentToAdd(String comment){
+        this.comments.add(comment);
+    }
 }

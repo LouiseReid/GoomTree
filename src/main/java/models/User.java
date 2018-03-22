@@ -56,4 +56,17 @@ public class User {
     public void setFavAdverts(ArrayList<Advert> favAdverts) {
         this.favAdverts = favAdverts;
     }
+
+    public void addAdvertToFavourites(Advert advert){
+        this.favAdverts.add(advert);
+    }
+
+    public void removeAdvertFromFavourites(Advert advert){
+        this.favAdverts.remove(advert);
+    }
+
+    public void addAdvertToPostedAdverts(Advert advert){
+        this.postedAdverts.add(advert);
+    }
+
 }
