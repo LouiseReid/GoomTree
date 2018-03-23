@@ -16,16 +16,18 @@ public class Advert {
     private double price;
     private List<User> favouriters;
     private List<Comment> comments;
+    private String image;
 
     public Advert() {
     }
 
-    public Advert(User owner, String title, String description, Category category, double price) {
+    public Advert(User owner, String title, String description, Category category, double price, String image) {
         this.owner = owner;
         this.title = title;
         this.description = description;
         this.category = category;
         this.price = price;
+        this.image = image;
         this.favouriters = new ArrayList<>();
         this.comments = new ArrayList<>();
     }
@@ -106,6 +108,15 @@ public class Advert {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void addUserToFavouriters(User user){

@@ -18,7 +18,7 @@ public class AdvertController {
     }
 
     public void setUpEndPoints(){
-        get("/adverts", (req, res) -> {
+        get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Advert> adverts = DBHelper.getAll(Advert.class);
             model.put("adverts", adverts);
