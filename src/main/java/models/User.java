@@ -12,12 +12,16 @@ public class User {
     private String name;
     private List<Advert> postedAdverts;
     private List<Advert> favAdverts;
+    private List<Comment> comments;
 
     public User() {
     }
 
     public User(String name) {
         this.name = name;
+        this.postedAdverts = new ArrayList<>();
+        this.favAdverts = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     @Id
@@ -55,6 +59,15 @@ public class User {
         return favAdverts;
     }
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     public void setFavAdverts(List<Advert> favAdverts) {
         this.favAdverts = favAdverts;
     }
@@ -70,6 +83,10 @@ public class User {
 
     public void addAdvertToPostedAdverts(Advert advert){
         this.postedAdverts.add(advert);
+    }
+
+    public void addCommentToComments(Comment comment){
+        this.comments.add(comment);
     }
 
 }

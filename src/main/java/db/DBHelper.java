@@ -1,5 +1,8 @@
 package db;
 
+import models.Advert;
+import models.Comment;
+import models.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -102,5 +105,12 @@ public class DBHelper {
         Criteria cr = session.createCriteria(classType);
         cr.add(Restrictions.eq("id", id));
         return getUnique(cr);
+    }
+
+    public static void addFavouriterToAdvert(Advert advert, User user){
+        user.addAdvertToFavourites(advert);
+        advert.addUserToFavouriters(user);
+        DBHelper.save(user);
+        DBHelper.save(advert);
     }
 }

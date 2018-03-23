@@ -26,6 +26,8 @@ public class Advert {
         this.description = description;
         this.category = category;
         this.price = price;
+        this.favouriters = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     @Id
