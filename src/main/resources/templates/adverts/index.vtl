@@ -1,3 +1,11 @@
+<section id="userLogin">
+    #parse ($login)
+</section>
+
+#if($user.Name)
+<p>Logged in as: $user.Name</p>
+<a href="/my_adverts" >My Adverts</a>
+#end
 
 <div class="adverts">
 

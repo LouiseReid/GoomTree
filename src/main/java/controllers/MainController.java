@@ -9,6 +9,7 @@ public class MainController {
     public static void main(String[] args) {
         staticFileLocation("/public");
         AdvertController advertController = new AdvertController();
+        LoginController loginController = new LoginController();
         Seeds.seedData();
     }
 }

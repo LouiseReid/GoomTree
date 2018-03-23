@@ -2,6 +2,7 @@ package controllers;
 
 import db.DBHelper;
 import models.Advert;
+import models.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -21,7 +22,10 @@ public class AdvertController {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Advert> adverts = DBHelper.getAll(Advert.class);
+            User loggedInUser = LoginController.getLoggedInUser(req, res);
             model.put("adverts", adverts);
+            model.put("user", loggedInUser);
+            model.put("login", "templates/login.vtl");
             model.put("template", "templates/adverts/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());

@@ -5,6 +5,8 @@ import models.Category;
 import models.Comment;
 import models.User;
 
+import java.util.List;
+
 public class Seeds {
 
     public static void seedData(){
@@ -49,6 +51,8 @@ public class Seeds {
         DBHelper.save(comment1);
 
         User user = DBHelper.find(user2.getId(), User.class);
+
+        List<Advert> advertList = DBHelper.getAll(Advert.class);
 
 
 
