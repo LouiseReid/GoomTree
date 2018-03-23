@@ -107,10 +107,5 @@ public class DBHelper {
         return getUnique(cr);
     }
 
-    public static void addFavouriterToAdvert(Advert advert, User user){
-        user.addAdvertToFavourites(advert);
-        advert.addUserToFavouriters(user);
-        DBHelper.save(user);
-        DBHelper.save(advert);
-    }
+
 }

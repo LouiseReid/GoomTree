@@ -1,0 +1,30 @@
+img {
+    width: 100px;
+    height: 100px
+}
+
+.advert-header {
+  display: flex;
+  flex: 3
+}
+
+.advert-title {
+  margin-right: 40px;
+}
+
+.others {
+  justify-content: flex-end;
+  display: inline-flex;
+}
+
+.advert-category {
+  margin-right: 40px;
+}
+
+.advert-content {
+  display: flex;
+}
+
+.advert-details {
+  margin-left: 25px;
+}

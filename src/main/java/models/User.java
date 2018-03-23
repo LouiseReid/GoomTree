@@ -11,7 +11,6 @@ public class User {
     private int id;
     private String name;
     private List<Advert> postedAdverts;
-    private List<Advert> favAdverts;
     private List<Comment> comments;
 
     public User() {
@@ -20,7 +19,6 @@ public class User {
     public User(String name) {
         this.name = name;
         this.postedAdverts = new ArrayList<>();
-        this.favAdverts = new ArrayList<>();
         this.comments = new ArrayList<>();
     }
 
@@ -44,7 +42,7 @@ public class User {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<Advert> getPostedAdverts() {
         return postedAdverts;
     }
@@ -54,10 +52,6 @@ public class User {
     }
 
 
-    @ManyToMany(mappedBy = "favouriters")
-    public List<Advert> getFavAdverts() {
-        return favAdverts;
-    }
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     public List<Comment> getComments() {
@@ -68,18 +62,6 @@ public class User {
         this.comments = comments;
     }
 
-    public void setFavAdverts(List<Advert> favAdverts) {
-        this.favAdverts = favAdverts;
-    }
-
-
-    public void addAdvertToFavourites(Advert advert){
-        this.favAdverts.add(advert);
-    }
-
-    public void removeAdvertFromFavourites(Advert advert){
-        this.favAdverts.remove(advert);
-    }
 
     public void addAdvertToPostedAdverts(Advert advert){
         this.postedAdverts.add(advert);

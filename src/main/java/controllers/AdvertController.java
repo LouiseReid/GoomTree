@@ -23,7 +23,7 @@ public class AdvertController {
             List<Advert> adverts = DBHelper.getAll(Advert.class);
             model.put("adverts", adverts);
             model.put("template", "templates/adverts/index.vtl");
-            return new ModelAndView(model, "templates/layout");
+            return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
     }
 }
