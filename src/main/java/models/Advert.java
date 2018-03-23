@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "adverts")
@@ -13,8 +14,8 @@ public class Advert {
     private String description;
     private Category category;
     private double price;
-    private ArrayList<User> favouriters;
-    private ArrayList<String> comments;
+    private List<User> favouriters;
+    private List<Comment> comments;
 
     public Advert() {
     }
@@ -83,25 +84,25 @@ public class Advert {
     public void setPrice(double price) {
         this.price = price;
     }
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "fav_ads",
             joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)})
-    public ArrayList<User> getFavouriters() {
+    public List<User> getFavouriters() {
         return favouriters;
     }
 
-
-    public void setFavouriters(ArrayList<User> favouriters) {
+    public void setFavouriters(List<User> favouriters) {
         this.favouriters = favouriters;
     }
 
-    @Column(name = "comments")
-    public ArrayList<String> getComments() {
+    @OneToMany(mappedBy = "advert")
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<String> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
@@ -113,7 +114,7 @@ public class Advert {
         this.favouriters.remove(user);
     }
 
-    public void addCommentToAdd(String comment){
+    public void addCommentToAdd(Comment comment){
         this.comments.add(comment);
     }
 }

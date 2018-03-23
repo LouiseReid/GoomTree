@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -9,8 +10,8 @@ public class User {
 
     private int id;
     private String name;
-    private ArrayList<Advert> postedAdverts;
-    private ArrayList<Advert> favAdverts;
+    private List<Advert> postedAdverts;
+    private List<Advert> favAdverts;
 
     public User() {
     }
@@ -40,22 +41,24 @@ public class User {
     }
 
     @OneToMany(mappedBy = "owner")
-    public ArrayList<Advert> getPostedAdverts() {
+    public List<Advert> getPostedAdverts() {
         return postedAdverts;
     }
 
-    public void setPostedAdverts(ArrayList<Advert> postedAdverts) {
+    public void setPostedAdverts(List<Advert> postedAdverts) {
         this.postedAdverts = postedAdverts;
     }
 
+
     @ManyToMany(mappedBy = "favouriters")
-    public ArrayList<Advert> getFavAdverts() {
+    public List<Advert> getFavAdverts() {
         return favAdverts;
     }
 
-    public void setFavAdverts(ArrayList<Advert> favAdverts) {
+    public void setFavAdverts(List<Advert> favAdverts) {
         this.favAdverts = favAdverts;
     }
+
 
     public void addAdvertToFavourites(Advert advert){
         this.favAdverts.add(advert);
