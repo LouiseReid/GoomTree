@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Seeds {
 
-    public static void seedData(){
-//    public static void main(String[] args) {
+//    public static void seedData(){
+    public static void main(String[] args) {
 
         DBHelper.deleteAll(Comment.class);
         DBHelper.deleteAll(Advert.class);
@@ -56,8 +56,13 @@ public class Seeds {
 
         List<Category> categories = DBHelper.allCategories();
 
-
         List<Advert> advertsforUser = DBHelper.usersAdverts(user1);
+
+        List<User> allUsers = DBHelper.getAll(User.class);
+
+        List<User> sorted = DBHelper.sortByID();
+
+        User loggedIn = DBHelper.currentUser();
 
 
 

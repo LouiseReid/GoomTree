@@ -5,7 +5,7 @@
 #if($user.Name)
 <p>Logged in as: $user.Name</p>
 <a href="/logout">Logout</a>
-<a href="/my_adverts" >My Adverts</a>
+<a href="/$user.Id/my_adverts" >My Adverts</a>
 #end
 
 <div class="adverts">

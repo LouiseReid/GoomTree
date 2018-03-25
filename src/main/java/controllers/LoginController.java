@@ -23,6 +23,8 @@ public class LoginController {
         post("/login", (req, res) ->{
             String username = req.queryParams("username");
             req.session().attribute("username", username);
+            User user = new User(req.session().attribute("username"));
+            DBHelper.save(user);
             res.redirect("/");
             return null;
         }, new VelocityTemplateEngine());
@@ -35,9 +37,11 @@ public class LoginController {
         }, new VelocityTemplateEngine());
     }
 
-    public static User getLoggedInUser(Request req, Response res){
-        User user = new User(req.session().attribute("username"));
-        DBHelper.save(user);
-        return user;
-    }
+//    public static User getLoggedInUser(Request req, Response res){
+////        User user = new User(req.session().attribute("username"));
+//        User user = DBHelper.find(req.session().attribute("id", User.class));
+////        User user = req.session().attribute("username");
+////        DBHelper.save(user);
+//        return user;
+//    }
 }

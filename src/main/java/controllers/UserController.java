@@ -20,11 +20,13 @@ public class UserController {
     }
 
     public void setUpEndPoints(){
-        get("/my_adverts", (req, res) -> {
+        get("/:id/my_adverts", (req, res) -> {
+            String strId = req.params(":id");
+            Integer intId = Integer.parseInt(strId);
+            User user = DBHelper.find(intId, User.class);
             Map<String, Object> model = new HashMap<>();
-            User loggedInUser = LoginController.getLoggedInUser(req, res);
-            model.put("user", loggedInUser);
-            List<Advert> adverts = DBHelper.usersAdverts(loggedInUser);
+            model.put("user", user);
+            List<Advert> adverts = DBHelper.usersAdverts(user);
             model.put("adverts", adverts);
             model.put("template", "templates/user/adverts.vtl");
             return new ModelAndView(model, "templates/layout.vtl");

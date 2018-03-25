@@ -5,7 +5,9 @@
         <a href="/adverts/new" >New Advert</a>
     </div>
 
+
     #foreach($advert in $adverts)
+    #if($adverts.size() > 0)
     <section>
         <div class="advert-header">
             <h3 class="advert-title">$advert.Title</h3>
@@ -31,5 +33,8 @@
             </div>
         </div>
     </section>
+    #else
+    <p>No adverts to show</p>
+    #end
     #end
 </div>

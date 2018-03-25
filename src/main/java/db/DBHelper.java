@@ -8,6 +8,8 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import java.awt.print.Book;
@@ -118,6 +120,29 @@ public class DBHelper {
         cr.add(Restrictions.eq("user.id", user.getId()));
         return getList(cr);
     }
+
+    public static List<User> sortByID(){
+        session = HibernateUtil.getSessionFactory().openSession();
+        transaction = session.beginTransaction();
+        Criteria cr = session.createCriteria(User.class);
+        cr.addOrder(Order.desc("id"));
+        return getList(cr);
+    }
+
+    public static User currentUser(){
+        Integer highest;
+        User user;
+        session = HibernateUtil.getSessionFactory().openSession();
+        transaction = session.beginTransaction();
+        Criteria cr = session.createCriteria(User.class);
+        cr.setProjection(Projections.max("id"));
+        highest = (Integer)cr.uniqueResult();
+        Criteria crit = session.createCriteria(User.class);
+        crit.add(Restrictions.eq("id", highest));
+        user = getUnique(crit);
+        return user;
+    }
+
 
     public static List<Category> allCategories() {
         List<Category> categories = new ArrayList<>();
