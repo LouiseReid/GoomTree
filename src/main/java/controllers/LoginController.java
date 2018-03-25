@@ -1,5 +1,6 @@
 package controllers;
 
+import db.DBHelper;
 import models.User;
 import spark.ModelAndView;
 import spark.Request;
@@ -36,6 +37,7 @@ public class LoginController {
 
     public static User getLoggedInUser(Request req, Response res){
         User user = new User(req.session().attribute("username"));
+        DBHelper.save(user);
         return user;
     }
 }

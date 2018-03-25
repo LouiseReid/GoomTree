@@ -1,0 +1,35 @@
+<h3>Active adverts for $user.Name</h3>
+
+<div class="adverts">
+    <div>
+        <a href="/adverts/new" >New Advert</a>
+    </div>
+
+    #foreach($advert in $adverts)
+    <section>
+        <div class="advert-header">
+            <h3 class="advert-title">$advert.Title</h3>
+            <div class="others">
+                <h3 class="advert-category">$advert.Category.Description</h3>
+                <h3 class="advert-user">$advert.User.Name</h3>
+            </div>
+        </div>
+        <div class="advert-content">
+            <div class = "advert-image">
+                <img src="$advert.Image" alt="$advert.Title">
+            </div>
+            <div class="advert-details">
+                <div>
+                    $advert.Description
+                </div>
+                <p>  #if($advert.Price == 0.0)
+                    Free
+                    #else
+                    £$advert.niceNumber()
+                    #end
+                </p>
+            </div>
+        </div>
+    </section>
+    #end
+</div>

@@ -1,6 +1,7 @@
 package db;
 
 import models.Advert;
+import models.Category;
 import models.Comment;
 import models.User;
 import org.hibernate.Criteria;
@@ -9,6 +10,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import java.awt.print.Book;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DBHelper {
@@ -107,5 +111,25 @@ public class DBHelper {
         return getUnique(cr);
     }
 
+    public static List<Advert> usersAdverts(User user) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Advert.class);
+        cr.createAlias("user", "user");
+        cr.add(Restrictions.eq("user.id", user.getId()));
+        return getList(cr);
+    }
 
-}
+    public static List<Category> allCategories() {
+        List<Category> categories = new ArrayList<>();
+        Collections.addAll(categories, Category.values());
+        return categories;
+        }
+    }
+
+
+
+
+
+
+
+
