@@ -4,6 +4,7 @@ import db.DBHelper;
 import models.Advert;
 import models.User;
 import spark.ModelAndView;
+import spark.Request;
 import spark.template.velocity.VelocityTemplateEngine;
 
 import java.util.HashMap;
@@ -31,6 +32,8 @@ public class UserController {
             model.put("template", "templates/user/adverts.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+
 
     }
 
