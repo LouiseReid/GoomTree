@@ -64,6 +64,7 @@ public class Seeds {
 
         User loggedIn = DBHelper.currentUser();
 
+        List<Advert> filteredAdverts = DBHelper.adverts(Category.SPORTS);
 
 
     }

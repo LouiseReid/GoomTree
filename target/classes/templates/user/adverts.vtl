@@ -7,7 +7,6 @@
 
 
     #foreach($advert in $adverts)
-    #if($adverts.size() > 0)
     <section>
         <div class="advert-header">
             <h3 class="advert-title">$advert.Title</h3>
@@ -29,11 +28,11 @@
                     £$advert.niceNumber()
                     #end
                 </p>
+                <form action="/adverts/$advert.Id/delete" method="post">
+                    <input type="submit" value="Delete">
+                </form>
             </div>
         </div>
     </section>
-    #else
-    <p>No adverts to show</p>
-    #end
     #end
 </div>

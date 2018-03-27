@@ -24,7 +24,9 @@ public class AdvertController {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Advert> adverts = DBHelper.getAll(Advert.class);
+            List<Category> categories = DBHelper.allCategories();
             User loggedInUser = LoginController.loggedInUser(req);
+            model.put("categories", categories);
             model.put("adverts", adverts);
             model.put("user", loggedInUser);
             model.put("login", "templates/login.vtl");
@@ -53,6 +55,28 @@ public class AdvertController {
             List<Category> categories = DBHelper.allCategories();
             model.put("categories", categories);
             model.put("template", "templates/adverts/create.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+
+        post ("/adverts/:id/delete", (req, res) -> {
+            int id = Integer.parseInt(req.params(":id"));
+            Advert advertToDelete = DBHelper.find(id, Advert.class);
+            DBHelper.delete(advertToDelete);
+            res.redirect(req.headers("referer"));
+            return null;
+        }, new VelocityTemplateEngine());
+
+
+        post("/adverts/filtered", (req, res) -> {
+            String selectedCategory = req.queryParams("category");
+            Category category = Category.valueOf(selectedCategory);
+            List<Advert> adverts = DBHelper.adverts(category);
+            List<Category> categories = DBHelper.allCategories();
+            Map<String, Object> model = new HashMap<>();
+            model.put("adverts", adverts);
+            model.put("categories", categories);
+            model.put("template", "templates/adverts/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 

@@ -7,6 +7,16 @@
 <a href="/logout">Logout</a>
 <a href="/$user.Id/my_adverts" >My Adverts</a>
 #end
+<a href="/">All adverts</a>
+
+<form action="/adverts/filtered" method="post">
+    <select id="category" name="category">
+        #foreach($category in $categories)
+        <option value="$category">$category.getDescription()</option>
+        #end
+        <input type="submit" value="Search" class="button">
+    </select>
+</form>
 
 <div class="adverts">
 

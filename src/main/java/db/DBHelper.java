@@ -148,8 +148,19 @@ public class DBHelper {
         List<Category> categories = new ArrayList<>();
         Collections.addAll(categories, Category.values());
         return categories;
-        }
     }
+
+    public static List<Advert> adverts(Category category){
+        session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Advert.class);
+        cr.add(Restrictions.eq("category", category));
+        return getList(cr);
+    }
+
+
+}
+
+
 
 
 
