@@ -4,10 +4,7 @@ import models.Advert;
 import models.Category;
 import models.Comment;
 import models.User;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -157,6 +154,17 @@ public class DBHelper {
         return getList(cr);
     }
 
+    public static void favouriteAdvert(Advert advert, User user){
+        advert.addUserToFavouriters(user);
+        user.addAdvertToFavourites(advert);
+        DBHelper.save(advert);
+        DBHelper.save(user);
+    }
+
+    public static List<Advert> usersFavAdverts(User user) {
+        Hibernate.initialize(user.getFavourites());
+        return user.getFavourites();
+    }
 
 }
 

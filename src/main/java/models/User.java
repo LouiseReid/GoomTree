@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,7 @@ public class User {
     private String name;
     private List<Advert> postedAdverts;
     private List<Comment> comments;
+    private List<Advert> favourites;
 
     public User() {
     }
@@ -20,6 +24,7 @@ public class User {
         this.name = name;
         this.postedAdverts = new ArrayList<>();
         this.comments = new ArrayList<>();
+        this.favourites = new ArrayList<>();
     }
 
     @Id
@@ -52,7 +57,6 @@ public class User {
     }
 
 
-
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     public List<Comment> getComments() {
         return comments;
@@ -62,6 +66,14 @@ public class User {
         this.comments = comments;
     }
 
+    @ManyToMany(mappedBy = "favouriters")
+    public List<Advert> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(List<Advert> favourites) {
+        this.favourites = favourites;
+    }
 
     public void addAdvertToPostedAdverts(Advert advert){
         this.postedAdverts.add(advert);
@@ -69,6 +81,10 @@ public class User {
 
     public void addCommentToComments(Comment comment){
         this.comments.add(comment);
+    }
+
+    public void addAdvertToFavourites(Advert advert){
+        this.favourites.add(advert);
     }
 
 }

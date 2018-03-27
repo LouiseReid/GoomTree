@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ public class Advert {
     private double price;
     private List<Comment> comments;
     private String image;
+    private List<User> favouriters;
 
     public Advert() {
     }
@@ -29,6 +33,7 @@ public class Advert {
         this.price = price;
         this.image = image;
         this.comments = new ArrayList<>();
+        this.favouriters = new ArrayList<>();
     }
 
     @Id
@@ -89,7 +94,6 @@ public class Advert {
     }
 
 
-
     @OneToMany(mappedBy = "advert")
     public List<Comment> getComments() {
         return comments;
@@ -108,12 +112,28 @@ public class Advert {
         this.image = image;
     }
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "faved_ads",
+               joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},
+               inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)})
+    public List<User> getFavouriters() {
+        return favouriters;
+    }
+
+    public void setFavouriters(List<User> favouriters) {
+        this.favouriters = favouriters;
+    }
+
     public void addCommentToAdd(Comment comment){
         this.comments.add(comment);
     }
 
     public String niceNumber(){
         return String.format("%.2f", price);
+    }
+
+    public void addUserToFavouriters(User user){
+        this.favouriters.add(user);
     }
 
 }
