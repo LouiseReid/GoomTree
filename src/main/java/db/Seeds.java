@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Seeds {
 
-//    public static void seedData(){
-    public static void main(String[] args) {
+    public static void seedData(){
+//    public static void main(String[] args) {
 
         DBHelper.deleteAll(Comment.class);
         DBHelper.deleteAll(Advert.class);

@@ -33,6 +33,18 @@ public class UserController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/:id/my_favourites", (req, res) -> {
+            String strId = req.params(":id");
+            Integer intId = Integer.parseInt(strId);
+            User user = DBHelper.find(intId, User.class);
+            List<Advert> adverts = DBHelper.usersFavAdverts(user);
+            Map<String, Object> model = new HashMap<>();
+            model.put("user", user);
+            model.put("adverts", adverts);
+            model.put("template", "templates/user/favourites.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
 
 
     }

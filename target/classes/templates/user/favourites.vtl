@@ -1,26 +1,7 @@
-<section id="userLogin">
-    #parse ($login)
-</section>
-
-#if($user.Name)
-<p>Logged in as: $user.Name</p>
-<a href="/logout">Logout</a>
-<a href="/$user.Id/my_adverts" >My Adverts</a>
-<a href="/$user.Id/my_favourites" >My Favourites</a>
-#end
-<a href="/">All adverts</a>
-
-<form action="/adverts/filtered" method="post">
-    <label for="category">Search:</label>
-    <select id="category" name="category">
-        #foreach($category in $categories)
-        <option value="$category">$category.getDescription()</option>
-        #end
-        <input type="submit" value="Search" class="button">
-    </select>
-</form>
+<h3>$user.Name's favourite adverts</h3>
 
 <div class="adverts">
+
 
     #foreach($advert in $adverts)
     <section>
@@ -28,7 +9,6 @@
             <h3 class="advert-title">$advert.Title</h3>
             <div class="others">
                 <h3 class="advert-category">$advert.Category.Description</h3>
-                <h3 class="advert-user">$advert.User.Name</h3>
             </div>
         </div>
         <div class="advert-content">
@@ -40,11 +20,14 @@
                     $advert.Description
                 </div>
                 <p>  #if($advert.Price == 0.0)
-                     Free
-                     #else
+                    Free
+                    #else
                     £$advert.niceNumber()
                     #end
                 </p>
+                <form action="/adverts/$advert.Id/delete" method="post">
+                    <input type="submit" value="Delete">
+                </form>
             </div>
         </div>
     </section>

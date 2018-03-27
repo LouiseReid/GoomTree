@@ -11,6 +11,6 @@ public class MainController {
         AdvertController advertController = new AdvertController();
         UserController userController = new UserController();
         LoginController loginController = new LoginController();
-//        Seeds.seedData();
+        Seeds.seedData();
     }
 }

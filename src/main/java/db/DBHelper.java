@@ -162,6 +162,8 @@ public class DBHelper {
     }
 
     public static List<Advert> usersFavAdverts(User user) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.refresh(user);
         Hibernate.initialize(user.getFavourites());
         return user.getFavourites();
     }
