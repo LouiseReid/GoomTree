@@ -165,6 +165,7 @@ public class DBHelper {
         session = HibernateUtil.getSessionFactory().openSession();
         session.refresh(user);
         Hibernate.initialize(user.getFavourites());
+        session.close();
         return user.getFavourites();
     }
 

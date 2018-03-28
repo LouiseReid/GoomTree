@@ -67,6 +67,7 @@ public class User {
     }
 
     @ManyToMany(mappedBy = "favouriters")
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Advert> getFavourites() {
         return favourites;
     }

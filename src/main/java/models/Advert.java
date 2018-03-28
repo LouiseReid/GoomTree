@@ -116,6 +116,7 @@ public class Advert {
     @JoinTable(name = "faved_ads",
                joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},
                inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)})
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<User> getFavouriters() {
         return favouriters;
     }

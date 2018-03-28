@@ -80,5 +80,15 @@ public class AdvertController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+
+        post ("/:id/favourite", (req, res) -> {
+            int id = Integer.parseInt(req.params(":id"));
+            Advert advertToFav = DBHelper.find(id, Advert.class);
+            User user = DBHelper.currentUser();
+            DBHelper.favouriteAdvert(advertToFav, user);
+            res.redirect(req.headers("referer"));
+            return null;
+        }, new VelocityTemplateEngine());
+
     }
 }
